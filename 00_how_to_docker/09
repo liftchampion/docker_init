@@ -1,0 +1,6 @@
+#docker run --rm -it alpine
+apt-get update
+apt-get upgrade
+apt-get install git
+apt-get install gcc
+apt-get install vim
