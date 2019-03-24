@@ -1,0 +1,12 @@
+docker-machine start Char
+docker-machine regenerate-certs -y Char
+docker-machine start Aiur
+docker-machine regenerate-certs -y Aiur
+eval $(docker-machine env Char)
+docker start overlord
+docker start spawning-pool
+docker start lair
+docker start roach-warden
+docker start Abathur
+./19
+docker ps
