@@ -1,12 +1,18 @@
 docker-machine start Char
-docker-machine regenerate-certs -y Char
+sleep 1
 docker-machine start Aiur
-docker-machine regenerate-certs -y Aiur
+docker-machine ls
+docker-machine regenerate-certs Char
+docker-machine regenerate-certs Aiur
 eval $(docker-machine env Char)
-docker start overlord
+#docker start overlord
 docker start spawning-pool
 docker start lair
 docker start roach-warden
 docker start Abathur
 ./19
 docker ps
+open -na "Google Chrome" --args --incognito "http://192.168.99.100:5000"
+open -na "Google Chrome" --args --incognito "http://192.168.99.100:8080"
+open -na "Google Chrome" --args --incognito "http://192.168.99.100:8081"
+open -na "Google Chrome" --args --incognito "http://192.168.99.100:3000"

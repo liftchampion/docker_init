@@ -1,0 +1,4 @@
+open -na "Google Chrome" --args --incognito "http://192.168.99.100:5000"
+open -na "Google Chrome" --args --incognito "http://192.168.99.100:8080"
+open -na "Google Chrome" --args --incognito "http://192.168.99.100:8081"
+open -na "Google Chrome" --args --incognito "http://192.168.99.100:3000"
