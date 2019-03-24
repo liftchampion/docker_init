@@ -1,0 +1,3 @@
+docker run --name Abathur -t -d --volume=/Users/ggerardy:/root -p 3000:3000 python:2-slim
+docker exec Abathur sh -c 'pip install flask'
+docker exec Abathur sh -c 'python /root/SCHOOL/docker-init/00_how_to_docker/Abathur_app/Abathur_flask.py'
