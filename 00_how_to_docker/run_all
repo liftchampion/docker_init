@@ -12,7 +12,5 @@ docker start roach-warden
 docker start Abathur
 ./19
 docker ps
-open -na "Google Chrome" --args --incognito "http://192.168.99.100:5000"
-open -na "Google Chrome" --args --incognito "http://192.168.99.100:8080"
-open -na "Google Chrome" --args --incognito "http://192.168.99.100:8081"
-open -na "Google Chrome" --args --incognito "http://192.168.99.100:3000"
+sleep 1
+./open_all
