@@ -11,9 +11,5 @@ RUN tar xvf teamspeak3-server_linux_amd64-3.7.0.tar.bz2
 RUN mv teamspeak3-server_linux_amd64/* ./
 RUN rm -f teamspeak3-server_linux_amd64-3.7.0.tar.bz2
 RUN touch .ts3server_license_accepted
-EXPOSE 9987/udp
-ENTRYPOINT (exec /root/ts3server_startscript.sh start inifile=/root/ts3server.ini) && (exec /bin/bash)
-#ENTRYPOINT exec echo 1337 && /bin/bash
-#ENTRYPOINT ["/root/ts3server_startscript.sh", "start", "inifile=/root/ts3server.ini"]
-#CMD ["/bin/bash"]
-#CMD ["", "/bin/bash"]
+EXPOSE 9987/udp 10011/tcp 10022/tcp 30033/tcp
+ENTRYPOINT ["/root/ts3server_minimal_runscript.sh"]
