@@ -1,0 +1,8 @@
+NAME=gg
+PORT=4242
+docker run --name=$NAME -p 9987:9987/udp --rm -dt thor:latest
+sleep 3
+TOKEN=$(docker logs $NAME | grep 'token'| awk -F '=' '{print $2}')
+echo "Token is:\x1B[1m\x1B[38;5;208m $TOKEN\x1B[0m"
+IP=$(ifconfig en0 | grep 'inet ' | awk '{print $2}')
+echo "Connect by \x1B[1m\x1B[38;5;208m$IP:$PORT\x1B[0m"

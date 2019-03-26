@@ -1,7 +1,6 @@
 FROM debian:latest
 MAINTAINER ggerardy
 RUN apt-get update
-RUN apt-get upgrade -y
 RUN apt-get install -y vim
 RUN apt-get install -y wget
 RUN apt-get install -y lbzip2
