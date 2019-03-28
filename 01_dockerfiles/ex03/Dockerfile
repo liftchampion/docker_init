@@ -30,9 +30,32 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 	build-essential \
 	yarn
 
-RUN curl -sSL https://get.rvm.io | bash
-
 WORKDIR /root
 RUN wget http://download.redis.io/releases/redis-5.0.4.tar.gz
 RUN tar xzf redis-5.0.4.tar.gz
 RUN cd redis-5.0.4 && make && make install
+
+WORKDIR /
+RUN curl -sSL https://get.rvm.io | bash
+ENV PATH $PATH:/usr/local/rvm/bin
+RUN rvm install 2.5.3
+ENV PATH $PATH:/usr/local/rvm/rubies/ruby-2.5.3/bin
+
+RUN apt-get update && apt-get install -y \
+	vim \
+	unzip
+
+WORKDIR /root
+RUN rm -f redis-5.0.4.tar.gz
+
+RUN apt-get remove -y cmdtest
+RUN mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
+ENV PATH $PATH:/root/homebrew/bin
+RUN brew install yarn
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+RUN apt-get install -y nodejs
+#RUN ln -s /usr/bin/nodejs /usr/bin/node
+
+RUN gem install gitlab-development-kit
+RUN gdk init gdk
+#RUN cd ./gdk && gdk install
