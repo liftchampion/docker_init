@@ -30,7 +30,6 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install -y \
 	make \
 	wget \
 	lbzip2 \
-	nodejs \
 	curl \
 	git \
 	build-essential \
