@@ -11,6 +11,7 @@ RUN echo 'docker ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 WORKDIR /home/docker
 USER docker
 
+#TODO delete nodejs
 RUN sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install -y \
 	tzdata \
 	postgresql \
@@ -46,8 +47,9 @@ RUN curl -sSL https://get.rvm.io | bash
 ENV PATH $PATH:/usr/local/rvm/bin:/home/docker/.rvm/bin
 RUN rvm install 2.5.3
 ENV PATH $PATH:/home/docker/.rvm/rubies/ruby-2.5.3/bin/
-RUN gem uninstall bundler -Iax
-RUN /home/docker/.rvm/src/rubygems-3.0.3/bin/gem uninstall bundler -Iax
+RUN /home/docker/.rvm/src/rubygems-3.0.3/bin/gem uninstall --all -Iax
+RUN gem uninstall --all -Iax
+RUN gem install -f bundler -v 1.17.3
 ####RUN rm -rf $(find / -name 'bundler')
 
 RUN mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
@@ -67,10 +69,10 @@ ENV GOPATH /home/docker/gopath
 ENV PATH $GOROOT/bin:$GOPATH/bin:$PATH
 
 ####ENV PATH $PATH:/usr/local/rvm/rubies/ruby-2.5.3/bin/gdk:/home/docker/homebrew/bin:/usr/local/rvm/bin
-#RUN sudo gem install gitlab-development-kit
-#RUN sudo gdk init gdk
+RUN gem install gitlab-development-kit
+RUN gdk init gdk
 
-#RUN cd ./gdk && gdk trust /home/docker/gdk && gdk install
+#RUN cd ./gdk && gdk install
 
 
 
