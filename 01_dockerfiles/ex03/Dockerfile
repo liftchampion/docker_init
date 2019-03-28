@@ -72,7 +72,7 @@ ENV PATH $GOROOT/bin:$GOPATH/bin:$PATH
 RUN gem install gitlab-development-kit
 RUN gdk init gdk
 
-#RUN cd ./gdk && gdk install
+RUN cd ./gdk && gdk install
 
 
 
