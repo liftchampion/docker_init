@@ -26,15 +26,7 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 	-subj "/C=UK/ST=GGgg/L=GGgg/O=GGgg/OU=GGgg/CN=192.168.99.100" \
 	-keyout /etc/gitlab/ssl/key.key \
 	-out /etc/gitlab/ssl/cert.crt
-#RUN openssl genrsa -passout pass:x -out server.pass.key 2048
-#RUN openssl rsa -passin pass:x -in server.pass.key -out server.key
-#RUN rm server.pass.key
-#RUN openssl req -new -key server.key -out server.csr \
-#			-subj "/C=UK/ST=GGgg/L=GGgg/O=GGgg/OU=GGgg/CN=ggggggg.com"
-#RUN openssl x509 -req -days 365 -in server.csr -signkey server.key \
-#			-out server.crt && \
-#		chmod 777 /etc/gitlab/ssl && \
-#		cp server.key server.crt /etc/gitlab/ssl
+
 RUN echo "nginx['ssl_certificate'] = \"/etc/gitlab/ssl/cert.crt\""  >> /etc/gitlab/gitlab.rb && \
 	echo "nginx['ssl_certificate_key'] = \"/etc/gitlab/ssl/key.key\"" >> /etc/gitlab/gitlab.rb && \
 	echo "nginx['redirect_http_to_https'] = true" >> /etc/gitlab/gitlab.rb && \
@@ -56,4 +48,6 @@ ENTRYPOINT cat /etc/gitlab/gitlab.rb | awk -v ip=$IP -v q="'" '{if ($1 == "exter
 			cat tmp.gg > /etc/gitlab/gitlab.rb && \
 			/usr/sbin/sshd && \
 			rm -f tmp.gg && \
-			bash
+			(/opt/gitlab/embedded/bin/runsvdir-start &) && \
+			gitlab-ctl reconfigure && \
+			tail -f /dev/null
