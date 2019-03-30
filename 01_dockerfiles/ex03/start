@@ -1,0 +1,1 @@
+docker run --rm --name gl -d -P -p 443:443 -p 80:80 -p 22222:22222 -e IP=$(docker-machine ip Char) zealot
